@@ -25,6 +25,7 @@ class wildfly::prepare {
 
   file { $wildfly::dirname :
     ensure  => directory,
+    recurse => true,
     owner   => $wildfly::user,
     group   => $wildfly::group,
     mode    => '0755',
