@@ -96,8 +96,15 @@ module PuppetX
       end
 
       def exec(command)
-        body = assemble_command(command)
-        send(body)
+        if command.kind_of?(Array)
+            for commandLine in command
+                body = assemble_command(commandLine)
+                send(body)
+            end
+        else
+            body = assemble_command(command)
+            send(body)
+        end
       end
 
       def deploy(name, source, server_group)
