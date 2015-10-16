@@ -28,7 +28,6 @@ class wildfly::prepare {
     recurse => true,
     owner   => $wildfly::user,
     group   => $wildfly::group,
-    mode    => '0755',
     require => User[$wildfly::user],
   }
 
