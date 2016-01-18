@@ -16,12 +16,16 @@ Puppet::Type.type(:wildfly_cli).provide(:http_api) do
     unless_eval = true
     onlyif_eval = false
 
-    unless @resource[:unless].nil?
-      unless_eval = evaluate_command(@resource[:unless])
+    if !!@resource[:unless] == @resource[:unless]
+        unless_eval = @resource[:unless]
+    elsif !@resource[:unless].nil?
+        unless_eval = evaluate_command(@resource[:unless])
     end
 
-    unless @resource[:onlyif].nil?
-      onlyif_eval = evaluate_command(@resource[:onlyif])
+    if !!@resource[:onlyif] == @resource[:onlyif]
+        onlyif_eval = @resource[:onlyif]
+    elsif !@resource[:onlyif].nil?
+        onlyif_eval = evaluate_command(@resource[:onlyif])
     end
 
     onlyif_eval || !unless_eval
